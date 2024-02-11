@@ -9,6 +9,7 @@
   #
 .global delay
 .global time2string
+.global hexasc
 
 .macro	PUSH reg
 	addi	$sp, $sp, -4
