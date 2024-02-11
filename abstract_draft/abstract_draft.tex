@@ -1,0 +1,30 @@
+\documentclass{article}
+
+\title{Cross-device communication, over and without the wire.}
+\author{Dylan Horn Kreiner and Praanto Samadder}
+
+\begin{document}
+\maketitle
+
+\section{Objectives and requirements}
+The purpose of this project is to build a WiFi scanner using the provided chip kit and an ESP8266.
+The chip kit will display the networks that can be connected to in the local area using data sent in by the ESP8266.
+Ports can also be opened with the ESP8266 to allow for other devices in the same network to send messages.
+These messages can then be read from the uno32 and replies can be sent.
+The chip kit will remember SSID and password for networks that the user has already logged into. This means, once the chip kit comes within the reach of a network, the chip kit will initiate procedures to auto-connect to that network.
+Once this has been implemented, this project can be extended to incorporate games between two devices on the same network, the other device can be anything capable of making handling WiFi requests in any way.
+
+\section{Solution}
+Data can be transmitted between the chip kit and the ESP8266 using I2C or SPI thus meeting the advanced project requirement.
+The ESP8266 can connect to any WiFi network that supports the IEEE 802.1x protocol.
+Messages can be sent through HTTP or Websocket through a hardcoded pre-determined port.
+Data can be stored in the EEPROM on the uno32 chip kit which needs to be accessed using SPI.
+
+\section{Contributions}
+Workload between the teammates has not been decided yet. While it is preferable that both teammate works with technologies they have prior experience on, steps will be taken to ensure both teammates have equal workload and have a clear understanding of the other member's contributions.
+
+\section{Reflections}
+Reflections will be added after the completion of the project and the presentation at the expo.
+
+
+\end{document}
