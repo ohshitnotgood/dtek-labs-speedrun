@@ -14,6 +14,7 @@
 #include <stdint.h>  /* Declarations of uint_32 and the like */
 #include <pic32mx.h> /* Declarations of system-specific addresses etc */
 #include "mipslab.h" /* Declatations for these labs */
+#include "test.h"
 
 #define NADA void
 
@@ -21,7 +22,8 @@ int my_time = 0x5957;
 
 char text_string[] = "text, more text, and even more text!";
 
-/// @brief
+/// ## Assignment 1: Polling switches
+///
 /// Initialises the LEDs.
 ///
 ///
@@ -40,7 +42,7 @@ void init_led(NADA)
 /// In Assignment 1, this variable is incremented.
 int __c = 0b0;
 
-/// @brief
+/// ## Assignment 1: Polling switches
 /// According to the problem sheet, the LEDs are controlled by PORTe.
 ///
 /// This function defines PORTe by address and sends a value to PORTe.
@@ -52,6 +54,17 @@ void led_count(NADA)
     volatile int *PORTe = (volatile int *)0xbf886110;
     *PORTe = __c;
     __c++;
+}
+
+/// ## Assignment 1: Polling Switches
+///
+/// Configures PORTd bits 11 to 5 into input mode.
+///
+/// According to the data sheet (page 3, https://ww1.microchip.com/downloads/en/DeviceDoc/60001120F.pdf)
+/// setting TRISx bit to 1 configures it to input mode.
+void init_buttons(NADA)
+{
+    TRISD = 0x7F << 5;
 }
 
 /* Interrupt Service Routine */
@@ -69,12 +82,11 @@ void lab_init(void)
 /* This function is called repetitively from the main program */
 void lab_work(void)
 {
-    // delay(1000);
-    //   time2string( text_string, my_time );
     display_string(3, text_string);
     display_update();
     quick_sleep(10000);
-    led_count();
-    //   tick( &my_time );
+    // led_count();
+    quick_sleep(10000);
+    write_fail_to_led();
     display_image(96, icon);
 }
