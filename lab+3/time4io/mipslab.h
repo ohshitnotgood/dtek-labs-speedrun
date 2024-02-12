@@ -49,6 +49,7 @@ extern char textbuffer[4][16];
 /* Written as part of asm lab: delay, time2string */
 void delay(int);
 void time2string(char *, int);
-int getbtns(void);
-int getsw(void);
+int get_button_values(void);
+int get_switch_values(void);
 void enable_interrupt(void);
+void clear_display(void);

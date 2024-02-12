@@ -78,21 +78,34 @@ void lab_init(void)
 {
     init_led();
     init_buttons_and_switches();
+    clear_display();
+}
+
+/// ## Assignment 1: (h)
+///
+/// At this stage, we still haven't implemented the ticker from lab 2 which means we cannot update the clock
+void time_updater(void)  {
+    int sw = get_switch_values();
+    int btn = get_button_values();
+    char* time = "16:42";
+
+    if (btn == 0b001) {
+        time = "btn2";
+        write_success_to_led();
+    } else if (btn == 0b010) {
+        time = "btn3";
+        write_success_to_led();
+    } else if (btn == 0b100) {
+        time = "btn4";
+        write_success_to_led();
+    } 
+    
+    display_string(0, time);
+    display_update();
 }
 
 /* This function is called repetitively from the main program */
 void lab_work(void)
 {
-    // led_count();
-    int sw = getsw();
-    int btn = getbtns();
-
-    if (btn == 0x4)
-    {
-        display_string(3, "1");
-    } else {
-        display_string(3, "0");
-    }
-
-    display_update();
+    time_updater();
 }
