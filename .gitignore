@@ -1,2 +1,10 @@
 **/.DS_Store
 
+# Ignore all build files
+**/**.c.o
+**/**.S.o
+**/**.elf
+**/**.hex
+
+# Ignore .deps dir in lab3
+lab+3/time4io/.deps
