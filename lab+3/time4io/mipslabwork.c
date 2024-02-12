@@ -80,17 +80,23 @@ void lab_init(void)
 {
     init_led();
     init_buttons_and_switches();
+    clear_display();
 }
 
 /// ## Assignment 1: (h)
 ///
-/// When called, pulls values from the buttons and the switches and updates `my_time` variable accordingly
+/// When called, pulls values from the buttons and the switches and updates `my_time` variable accordingly.
+///
+/// The time is updated according to the requirements in the problem sheet.
+///
+/// When BTN1 is pressed, the minute-ten (00:X0) is set to 0. Switch is shifted right-four, to adjust for the position
+/// of X.
+///
+/// This pattern is repeated for all of the buttons.
 void time_updater(void)
 {
     int sw = get_switch_values();
     int btn = get_button_values();
-    char *time = "16:42";
-
     if (btn == 0b001)
     {
         my_time = my_time & 0xff0f;
@@ -115,6 +121,5 @@ void lab_work(void)
     display_string(3, text_string);
     display_update();
     tick(&my_time);
-    display_image(96, icon);
     time_updater();
 }
