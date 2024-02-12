@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "prime.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "mipslab.h": "c",
+        "test.h": "c"
     }
 }
