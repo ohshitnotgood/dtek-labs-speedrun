@@ -25,7 +25,7 @@ void user_isr(void)
 }
 
 /* Lab-specific initialization goes here */
-void labinit(void)
+void lab_init(void)
 {
     init_timer_2();
 }
@@ -35,22 +35,15 @@ int timerFalse = 0;
 /* This function is called repetitively from the main program */
 void lab_work(void)
 {
-    if (check_t2Timer_timeout()) timerCounter++;
-    
-      time2string( textstring, mytime );
-      display_string( 3, textstring );
-      display_update();
-      tick( &mytime );
-      display_image(96, icon);
-    // if (timerCounter == 1000000) {
-    //     if (timerFalse) {
-    //         display_string(0, "0");
-    //         timerFalse = 0;
-    //     } else {
-    //         display_string(0, "1");
-    //         timerFalse = 1;
-    //     }
-    //     timerCounter = 0;
-    // }
-    // display_update();
+    if (check_t2Timer_timeout())
+        timerCounter++;
+
+    if (timerCounter == 10)
+    {
+        time2string(textstring, mytime);
+        display_string(3, textstring);
+        display_update();
+        tick(&mytime);
+        timerCounter = 0;
+    }
 }

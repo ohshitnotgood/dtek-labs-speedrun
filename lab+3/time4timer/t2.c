@@ -10,6 +10,8 @@ void init_timer_2(void) {
     disable_t2_timer();
     clear_t2_timer();
     set_t2_timer_scaling();
+    enable_t2con();
+    start_t2_timer();
 }
 
 /// According to the timers data sheet (page 9, https://ww1.microchip.com/downloads/en/DeviceDoc/61105F.pdf)
@@ -33,8 +35,8 @@ void disable_t2_timer(void) {
 ///
 /// This would mean after every 100.000 timeouts, one second will have passed.
 void set_t2_timer_scaling(void) {
-    T2CON = 0x30;
-    PR2 = ((80000000 / 8) / 1000);
+    T2CON = 0x70;
+    PR2 = ((80000000 / 256) / 10);
 }
 
 void start_t2_timer(void) {
