@@ -53,3 +53,5 @@ void time2string( char *, int );
 int getbtns(void);
 int getsw(void);
 void enable_interrupt(void);
+void init_timer_2(void);
+int check_t2Timer_timeout(void);

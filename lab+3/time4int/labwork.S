@@ -11,6 +11,8 @@
 
 .global time2string
 
+.global enable_interrupt
+
 # Please keep the two macros PUSH and POP unchanged
 
 .macro	PUSH reg
@@ -130,3 +132,9 @@ time2string:
 		POP	$s0
  		jr 	$ra
  		nop
+
+# Function that enables interrupts globally
+enable_interrupt:
+    ei
+    jr  $ra
+    nop
