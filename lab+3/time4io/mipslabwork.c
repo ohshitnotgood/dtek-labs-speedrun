@@ -19,8 +19,13 @@
 #define NADA void
 
 int my_time = 0x5957;
-
 char text_string[] = "text, more text, and even more text!";
+
+/// @brief Local implementation TRISx
+volatile int *TRISe = (volatile int *)0xbf886100;
+
+/// @brief Local implementation of PORTx
+volatile int *PORTe = (volatile int *)0xbf886110;
 
 /// ## Assignment 1: (c)
 ///
@@ -32,7 +37,6 @@ char text_string[] = "text, more text, and even more text!";
 /// This function configures PORTe to be in output mode by setting 0 in TRISe.
 void init_led(NADA)
 {
-    volatile int *TRISe = (volatile int *)0xbf886100;
     *TRISe = 0x00;
 }
 
@@ -51,7 +55,6 @@ int __c = 0b0;
 /// In assignment 1, this function is called every 'tick'.
 void led_count(NADA)
 {
-    volatile int *PORTe = (volatile int *)0xbf886110;
     *PORTe = __c;
     __c++;
 }
@@ -67,45 +70,51 @@ void init_buttons_and_switches(NADA)
     TRISD = 0x7F << 5;
 }
 
-/* Interrupt Service Routine */
 void user_isr(void)
 {
     return;
 }
 
-/* Lab-specific initialization goes here */
+/// @brief Initialises the LEDs, buttons and switches.
 void lab_init(void)
 {
     init_led();
     init_buttons_and_switches();
-    clear_display();
 }
 
 /// ## Assignment 1: (h)
 ///
-/// At this stage, we still haven't implemented the ticker from lab 2 which means we cannot update the clock
-void time_updater(void)  {
+/// When called, pulls values from the buttons and the switches and updates `my_time` variable accordingly
+void time_updater(void)
+{
     int sw = get_switch_values();
     int btn = get_button_values();
-    char* time = "16:42";
+    char *time = "16:42";
 
-    if (btn == 0b001) {
-        time = "btn2";
-        write_success_to_led();
-    } else if (btn == 0b010) {
-        time = "btn3";
-        write_success_to_led();
-    } else if (btn == 0b100) {
-        time = "btn4";
-        write_success_to_led();
-    } 
-    
-    display_string(0, time);
-    display_update();
+    if (btn == 0b001)
+    {
+        my_time = my_time & 0xff0f;
+        my_time = (sw << 4) | my_time;
+    }
+    else if (btn == 0b010)
+    {
+        my_time = my_time & 0xf0ff;
+        my_time = (sw << 8) | my_time;
+    }
+    else if (btn == 0b100)
+    {
+        my_time = my_time & 0x0fff;
+        my_time = (sw << 12) | my_time;
+    }
 }
 
 /* This function is called repetitively from the main program */
 void lab_work(void)
 {
+    time2string(text_string, my_time);
+    display_string(3, text_string);
+    display_update();
+    tick(&my_time);
+    display_image(96, icon);
     time_updater();
 }
