@@ -39,6 +39,9 @@ void user_isr(void)
 /* Lab-specific initialization goes here */
 void labinit(void)
 {
+    // enable interrupt in IEC(0). IEC(0) is T2IE (timer 2 interrupt enable flag)
+    // IPC(2) contains T2IP (timer 2 interrupt priority control)
+    init_timer_2();
     enable_interrupt();
 }
 
