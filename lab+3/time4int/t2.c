@@ -16,13 +16,13 @@ void init_timer_2(void) {
 /// According to the timers data sheet (page 9, https://ww1.microchip.com/downloads/en/DeviceDoc/61105F.pdf)
 /// setting bit 15 to 1 enables the T2 timer module.
 void enable_t2con(void) {
-    T2CON = 0x1 << 15;
+    T2CON = 0x1 << 15 | T2CON;
 }
 
 /// According to the timers data sheet (page 9, https://ww1.microchip.com/downloads/en/DeviceDoc/61105F.pdf)
 /// setting bit 15 to 0 disables the T2 timer module.
 void disable_t2_timer(void) {
-    T2CON = 0x0 << 15;
+    T2CON = 0x0 << 15 | T2CON;
 }
 
 /// Applies 1:8 scaling on the timer. This is done by setting 111 to bits <6::4> in T2CON.
@@ -34,12 +34,12 @@ void disable_t2_timer(void) {
 ///
 /// This would mean after every 100.000 timeouts, one second will have passed.
 void set_t2_timer_scaling(void) {
-    T2CON = 0x70;
+    T2CON = 0x70 | T2CON;
     PR2 = ((80000000 / 256) / 10);
 }
 
 void start_t2_timer(void) {
-    T2CON = 0b1 << 15;
+    T2CON = 0b1 << 15 | T2CON;
 }
 
 void clear_t2_timer(void) {

@@ -23,8 +23,10 @@ int timerCounter = 0;
 /* Interrupt Service Routine */
 void user_isr(void)
 {
-    if (check_t2Timer_timeout())
+    if (check_t2Timer_timeout()) {
+        // display_string(0, "hello")
         timerCounter++;
+    }
 
     if (timerCounter == 10)
     {
@@ -41,9 +43,10 @@ void labinit(void)
 {
     // enable interrupt in IEC(0). IEC(0) is T2IE (timer 2 interrupt enable flag)
     // IPC(2) contains T2IP (timer 2 interrupt priority control)
-    IEC(0) = 0x1 << 8;
+    IEC(0) = 0x1 << 8 | IEC(0);
     /// Set priority
-    IPC(2) == 0b111 << 26;;
+    IPC(2) = 0b111 << 2 | IPC(2);
+    IPC(2) = 0b11 | IPC(2);
     init_timer_2();
     enable_interrupt();
 }
