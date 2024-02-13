@@ -50,8 +50,8 @@ extern char textbuffer[4][16];
 void delay(int);
 void time2string( char *, int );
 /* Written as part of i/o lab: getbtns, getsw, enable_interrupt */
-int getbtns(void);
-int getsw(void);
+int get_button_values(void);
+int get_switch_values(void);
 void enable_interrupt(void);
 void init_timer_2(void);
 int check_t2Timer_timeout(void);

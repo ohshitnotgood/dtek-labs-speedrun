@@ -122,4 +122,5 @@ void lab_work(void)
     display_update();
     tick(&my_time);
     time_updater();
+    led_count();
 }

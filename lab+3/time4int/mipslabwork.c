@@ -41,6 +41,9 @@ void labinit(void)
 {
     // enable interrupt in IEC(0). IEC(0) is T2IE (timer 2 interrupt enable flag)
     // IPC(2) contains T2IP (timer 2 interrupt priority control)
+    IEC(0) = 0x1 << 8;
+    /// Set priority
+    IPC(2) == 0b111 << 26;;
     init_timer_2();
     enable_interrupt();
 }

@@ -10,7 +10,6 @@ void init_timer_2(void) {
     disable_t2_timer();
     clear_t2_timer();
     set_t2_timer_scaling();
-    enable_t2con();
     start_t2_timer();
 }
 
