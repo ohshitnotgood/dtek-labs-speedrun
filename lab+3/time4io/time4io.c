@@ -6,7 +6,7 @@
 ///
 /// Data from switches are, apparently, returned as 0s and 1s. 
 ///
-/// Bits 11-8 store the data from the buttons.
+/// Bits 11-8 store the data from the switches.
 /// 
 /// This data is then shifted and filtered to return a 4 bit value. The 3 bits represent SW3, SW2, SW1 and 
 /// SW0 from MSB to LSB
