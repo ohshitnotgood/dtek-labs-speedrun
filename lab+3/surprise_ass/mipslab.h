@@ -16,7 +16,7 @@ uint8_t spi_send_recv(uint8_t data);
 
 /* Declare lab-related functions from mipslabfunc.c */
 char * itoaconv( int num );
-void lab_work(void);
+void labwork(void);
 int nextprime( int inval );
 void quicksleep(int cyc);
 void tick( unsigned int * timep );
@@ -50,8 +50,8 @@ extern char textbuffer[4][16];
 void delay(int);
 void time2string( char *, int );
 /* Written as part of i/o lab: getbtns, getsw, enable_interrupt */
-int get_button_values(void);
-int get_switch_values(void);
+int getbtns(void);
+int getsw(void);
 void enable_interrupt(void);
 void init_timer_2(void);
 int check_t2Timer_timeout(void);
