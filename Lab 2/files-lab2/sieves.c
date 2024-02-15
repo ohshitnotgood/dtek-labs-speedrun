@@ -67,6 +67,51 @@ void print_sieves(int n)
             print_number(i + 2);
         }
     }
+
+    int prime_difference[array_size];
+    int last_prime = 0;
+
+    for (int i = 0; i < array_size; i++) {
+        prime_difference[i] = 0;
+    }
+    // create new list
+    // 
+    // for each 1s in the for loop,
+    int no_differences = 0;
+
+    for (int i = 1; i < array_size; i++)
+    {
+        if (primes[i] == 1)
+        {
+            prime_difference[i] = i - last_prime;
+            last_prime = i;
+            no_differences++;
+        }
+    }
+
+    // for (int i = 0; i < array_size; i++)
+    // {
+    //     // printf("%i", prime_difference[i]);
+    //     // printf("\n");
+    // }
+
+
+    printf("\n");
+    // int prime_length = 0;
+    // // Get the number of primes in our list
+    // for (int i = 0; i < array_size; i++) {
+    //     if (primes[i] == 1) prime_length++;
+    // }
+
+    int difference_total = 0;
+    for (int i = 0; i < array_size; i++) {
+        difference_total += prime_difference[i];
+    }
+
+    double average_difference =  (double) difference_total / (double) no_differences;
+    printf("%f", average_difference);
+
+
 }
 
 int main(int argc, char *argv[])
